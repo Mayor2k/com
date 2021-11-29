@@ -7,12 +7,12 @@ class OrderSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Order
-        fields = ['id','created', 'owner', 'title', 'order','description', 'table']
+        fields = ['id','created', 'owner', 'title', 'order','status', 'table']
 
 class MenuItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = menuItem
-        fields = ['id','title', 'category', 'composition', 'price']
+        fields = ['id','title', 'category', 'composition','note', 'price']
 
 class UserSerializer(serializers.ModelSerializer):
     orders = serializers.PrimaryKeyRelatedField(many=True, queryset=Order.objects.all())

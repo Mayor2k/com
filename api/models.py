@@ -9,8 +9,8 @@ class Order(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     owner = models.ForeignKey('auth.User', related_name='orders', on_delete=models.CASCADE)
     title = models.CharField(default=generate_random_code, max_length=20)
-    description = models.TextField(blank=True)
     order = models.JSONField(default=list)
+    status = models.CharField(default='accepted', max_length=50, blank=False)
     table = models.PositiveSmallIntegerField(default=1,blank=True,validators=[MinValueValidator(1)])
 
     def __str__(self):
@@ -37,6 +37,7 @@ class menuItem(models.Model):
     title = models.CharField(max_length=50, blank=False)
     category = models.CharField(max_length=50, choices=CHOICES, blank=False)
     composition = models.TextField(blank=True)
+    note = models.TextField(blank=True)
     price = models.PositiveSmallIntegerField(default=1,blank=True,validators=[MinValueValidator(1)])
 
     def __str__(self):
