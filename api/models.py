@@ -10,6 +10,7 @@ class Order(models.Model):
     owner = models.ForeignKey('auth.User', related_name='orders', on_delete=models.CASCADE)
     title = models.CharField(default=generate_random_code, max_length=20)
     order = models.JSONField(default=list)
+    total = models.PositiveIntegerField(default=1,blank=False)
     status = models.CharField(default='accepted', max_length=50, blank=False)
     table = models.PositiveSmallIntegerField(default=1,blank=True,validators=[MinValueValidator(1)])
 
