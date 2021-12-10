@@ -20,8 +20,17 @@ class Order(models.Model):
     def save(self, *args, **kwargs):
         super(Order, self).save(*args, **kwargs)
 
+class menuCategory(models.Model):
+    title = models.CharField(max_length=50, blank=False)
+
+    def __str__(self):
+        return self.title
+    
+    def save(self, *args, **kwargs):
+        super(menuCategory, self).save(*args, **kwargs)
+
 class menuItem(models.Model):
-    CHOICES = [
+    """CHOICES = [
         ('Холодные закуски', 'Холодные закуски'),
         ('Салаты', 'Салаты'),
         ('Хлеб', 'Хлеб'),
@@ -33,12 +42,12 @@ class menuItem(models.Model):
         ('Гарниры', 'Гарниры'),
         ('Пасты и ризотто', 'Пасты и ризотто'),
         ('Десерты', 'Десерты')
-    ]
+    ]"""
 
     title = models.CharField(max_length=50, blank=False)
-    category = models.CharField(max_length=50, choices=CHOICES, blank=False)
+    category = models.ForeignKey(menuCategory, on_delete=models.CASCADE, blank=False, default=0)
+    #category = models.CharField(max_length=50, choices=CHOICES, blank=False)
     composition = models.TextField(blank=True)
-    note = models.TextField(blank=True)
     price = models.PositiveSmallIntegerField(default=1,blank=True,validators=[MinValueValidator(1)])
 
     def __str__(self):
