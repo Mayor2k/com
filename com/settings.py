@@ -13,19 +13,21 @@ SECRET_KEY = '%mws#nv@coyum7s(&5=jwh%$fknrll89h96wm#uro!ijj*4tf)'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', '0.0.0.0', 'mayor2k.pythonanywhere.com', '192.168.0.15']
+ALLOWED_HOSTS = ['127.0.0.1', '0.0.0.0', 'mayor2k.pythonanywhere.com', '192.168.0.15', '192.168.56.1']
 
 # Application definition
 
 INSTALLED_APPS = [
     'api.apps.ApiConfig',
-    'web.apps.WebConfig',
+    'dashboard.apps.DashboardConfig',
+    'websocket.apps.WebsocketConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'channels',
     'rest_framework',
     'rest_framework.authtoken'
 ]
@@ -69,6 +71,16 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'com.wsgi.application'
+ASGI_APPLICATION = 'com.asgi.application'
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [("127.0.0.1", 6379)],
+        },
+    },
+}
 
 DATABASES = {
     'default': {

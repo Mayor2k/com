@@ -6,7 +6,6 @@ from .models import Order, menuItem
 from .serializers import OrderSerializer, UserSerializer, MenuItemSerializer
 from rest_framework.response import Response
 from django.contrib.auth.models import User
-
 from rest_framework.authtoken.models import Token
 
 @authentication_classes([BasicAuthentication, TokenAuthentication,])
@@ -16,6 +15,7 @@ class OrderViewSet(viewsets.ModelViewSet):
     serializer_class = OrderSerializer
 
     def list(self, request):
+
         body = request.data
 
         if len(body) > 0:
@@ -23,7 +23,6 @@ class OrderViewSet(viewsets.ModelViewSet):
             serializer = self.serializer_class(query, many=True,)
         else:
             serializer = self.serializer_class(self.queryset, many=True,)
-        
         print(len(request.data))
         return Response(serializer.data)
         

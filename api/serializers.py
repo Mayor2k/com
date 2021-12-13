@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 class OrderSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
-
+    
     class Meta:
         model = Order
         fields = ['id','created', 'owner', 'title', 'order', 'total' , 'status', 'table']

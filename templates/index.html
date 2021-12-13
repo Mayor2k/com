@@ -7,6 +7,110 @@
     <title>Document</title>
 </head>
 <body>
-    <p>hi</p>
+    <h1>DASHBOARD</h1>
+    
+    {% for i in items %}
+        <p>{{i.title}}</p>
+    {% endfor %}
 </body>
 </html>
+
+<!--<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Generic Api Consumer</title>
+</head>
+<body>
+
+<button id="list">List</button>
+<button id="retrieve">Retrieve</button>
+<button id="create">Create</button>
+<button id="patch">Patch</button>
+<button id="update">Update</button>
+<button id="delete">Delete</button>
+
+<pre id="response"></pre>
+
+<script>
+    const ws = new WebSocket("ws://localhost:8000/orders/?token=78d24a6c0d72a7437082ffc1c02cd7ddc2ce98a4")
+    /*ws.onmessage = function (e) {
+        document.getElementById("response").textContent = JSON.stringify(JSON.parse(e.data), undefined, 2);
+        console.log(e.data)
+    }*/
+    ws.onopen = function () {
+        ws.send(
+            JSON.stringify({
+                action: "subscribe",
+                request_id: new Date().getTime(),
+            })
+        );
+    }
+    ws.addEventListener('message', function (event) {
+        document.getElementById("response").textContent = JSON.stringify(JSON.parse(event.data), undefined, 2);
+        console.log('Message from server ', event.data);
+    });
+
+    document.querySelector('#list').onclick = function (e) {
+        ws.send(JSON.stringify({
+            action: "subscribe",
+            request_id: new Date().getTime()
+        }))
+    };
+
+    document.querySelector('#retrieve').onclick = function (e) {
+        ws.send(JSON.stringify({
+            action: "retrieve",
+            request_id: new Date().getTime(),
+            pk: 14
+        }))
+    };
+
+    document.querySelector('#create').onclick = function (e) {
+        ws.send(JSON.stringify({
+            action: "create",
+            request_id: new Date().getTime(),
+            data: {
+                order: {
+                    title: "плов узбекский",
+                    quantity: 3,
+                    note: "быстро принеси пжжж"
+                },
+                total: 500,
+                table: 2
+            }
+        }))
+    };
+
+    document.querySelector('#patch').onclick = function (e) {
+        ws.send(JSON.stringify({
+            action: "patch",
+            request_id: new Date().getTime(),
+            pk: 12,
+            data: {
+                status: "complite"
+            }
+        }))
+    }
+
+    document.querySelector('#update').onclick = function (e) {
+        ws.send(JSON.stringify({
+            action: "update",
+            request_id: new Date().getTime(),
+            pk: 12,
+            data: {
+                status: "complite"
+            }
+        }))
+    }
+
+    document.querySelector('#delete').onclick = function (e) {
+        ws.send(JSON.stringify({
+            action: "delete",
+            request_id: new Date().getTime(),
+            pk: 12
+        }))
+    }
+</script>
+</body>
+</html>-->
